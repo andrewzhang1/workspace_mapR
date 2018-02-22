@@ -1,0 +1,22 @@
+ 
+----- Delete the target hdfs dir -----
+> hdfs dfs -rm -R /data/wordcount/output
+18/02/21 20:46:57 INFO fs.TrashPolicyDefault: Moved: 'hdfs://quickstart.cloudera:8020/data/wordcount/output' to trash at: hdfs://quickstart.cloudera:8020/user/cloudera/.Trash/Current/data/wordcount/output1519274817722
+ 
+----- Launching Hadoop Job ---- 
+ 
+  - Ignore the warning: 'WARN hdfs.DFSClient: Caught exception'
+    Its a Hadoop bug described at: https://issues.apache.org/jira/browse/HDFS-10429
+  
+> hadoop jar ./target/mycompany.app-1.0.0-fat.jar com.mycompany.app.DriverNumReducers  /data/wordcount/input  /data/wordcount/output
+Exception in thread "main" java.lang.ClassNotFoundException: com.mycompany.app.DriverNumReducers
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:358)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:270)
+	at org.apache.hadoop.util.RunJar.run(RunJar.java:214)
+	at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
